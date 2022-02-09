@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+ <head>  
+ 	<title>Waiting Room</title>
+     <script src="jquery-2.2.0.min.js">
+	</script>
+
+	<style>
+	 body {
+	  margin: 0;
+	  height: 100vh;
+	  background: #E3E3E3;
+	  color: #707070;
+	  text-align: center;
+	 }
+	 
+	 text_elt {
+	  position: relative;
+	  top: 30%;
+	  transform: translateY(-50%);
+	 }
+	 
+	 timer {
+	  font-size: 180px;
+	  font-weight: bold;
+	  font-family: "Avenir";
+	 }
+	 
+	 phrase {
+	  font-size: 40px;
+	  font-weight: light;
+	  font-family: "Avenir";
+	 }
+	 
+	</style>
+
+
+	<script src="wait.js">
+	</script>
+</head>
+
+
+
+<body>
+ 
+ <text_elt>
+  <timer id="countdown">
+  </timer>
+  
+  <br>
+  
+  <phrase id="phrase">
+   What should you be doing right now?
+  </phrase>
+  
+ </text_elt>
+ 
+ 
+
+</body>
+</html>

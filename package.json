@@ -1,0 +1,11 @@
+{
+  "name": "mindfulbrowsing",
+  "version": "1.0.0",
+  "description": "Browse the web more mindfully",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moritz von Berg <moritzvonberg@gmail.com>",
+  "license": "ISC"
+}
