@@ -8,7 +8,7 @@ async function initSettings() {
         blacklist = res.blacklist || "";
         delay = res.delay || 7;
         cooldown = res.cooldown || 0.5;        
-        waitedDict = res.waitedDict || {"www.reddit.com": Date.now()};
+        waitedDict = res.waitedDict || new Object();
     });
     chrome.storage.sync.set({"blacklist": blacklist, "delay": delay, "cooldown": cooldown, "waitedDict": waitedDict});
 }
@@ -88,18 +88,20 @@ chrome.webNavigation.onBeforeNavigate.addListener((data) => {
         console.log(data);
         let testUrl = new URL(data.url);
         // if url hostname is in blacklist, check if we have already waited for url within time limit
-        if (testUrl && blacklist.includes(testUrl.hostname)) {
-            if (waitedAlready(testUrl.hostname)) {
-                console.log(`bypassing wait because cooldown site:${testUrl}`);
-                // do nothing, let request go through
+        if (testUrl){
+            if (testUrl.protocol == "https:" || testUrl.protocol == "http:" && blacklist.includes(testUrl.hostname)) {
+                if (waitedAlready(testUrl.hostname)) {
+                    console.log(`bypassing wait because cooldown site:${testUrl}`);
+                    // do nothing, let request go through
+                } else {
+                    // add hostname to list of cooldowns
+                    console.log(`triggering cooldown site:${testUrl}`);
+                    notifyCooldownTriggered(testUrl.hostname);
+                    redirectToBackground(data.tabId, data.url);
+                }
             } else {
-                // add hostname to list of cooldowns
-                console.log(`triggering cooldown site:${testUrl}`);
-                notifyCooldownTriggered(testUrl.hostname);
-                redirectToBackground(data.tabId, data.url);
+                console.log(`Url hostname not in blacklist site:${testUrl.hostname}`);
             }
-        } else if (testUrl) {
-            console.log(`Url hostname not in blacklist site:${testUrl.hostname}`);
         } else {
             console.log(`url can't match ${data.url}`)
         }
