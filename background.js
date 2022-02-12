@@ -89,7 +89,7 @@ chrome.webNavigation.onBeforeNavigate.addListener((data) => {
         let testUrl = new URL(data.url);
         // if url hostname is in blacklist, check if we have already waited for url within time limit
         if (testUrl){
-            if (testUrl.protocol == "https:" || testUrl.protocol == "http:" && blacklist.includes(testUrl.hostname)) {
+            if ((testUrl.protocol == "https:" || testUrl.protocol == "http:") && blacklist.includes(testUrl.hostname)) {
                 if (waitedAlready(testUrl.hostname)) {
                     console.log(`bypassing wait because cooldown site:${testUrl}`);
                     // do nothing, let request go through
