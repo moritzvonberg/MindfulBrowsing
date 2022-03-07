@@ -4,13 +4,13 @@ var cooldown;
 var waitedDict;
 
 async function initSettings() {
-    chrome.storage.sync.get(null, function(res) {
+    await chrome.storage.sync.get(null, function(res) {
         blacklist = res.blacklist || "";
         delay = res.delay || 7;
         cooldown = res.cooldown || 0.5;        
         waitedDict = res.waitedDict || new Object();
-    });
-    chrome.storage.sync.set({"blacklist": blacklist, "delay": delay, "cooldown": cooldown, "waitedDict": waitedDict});
+    })
+    chrome.storage.sync.set({"blacklist": blacklist, "delay": delay, "cooldown": cooldown, "waitedDict": waitedDict})
 }
 
 async function updateSettings() {
