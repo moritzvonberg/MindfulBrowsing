@@ -1,5 +1,7 @@
 ### Mindful Browsing
 
+Please note that this extension was hacked together over the course of 2-3 days.
+
 Mindful browsing is a chrome extension to give you time to actually think if you want to visit the website you are navigating to to avoid wasting time on sites like reddit and youtube out of habit.
 
 User settings are synced across devices, though I haven't tested it across different devices yet.
